@@ -1,0 +1,22 @@
+{
+  "name": "correios-plp-to-pdf",
+  "version": "0.1.0-dev.0",
+  "description": "PoC to write a PLP to PDF using Node",
+  "main": "src/index.js",
+  "scripts": {
+    "start": "node src/index.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/davikawasaki/correios-plp-to-pdf.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/davikawasaki/correios-plp-to-pdf/issues"
+  },
+  "homepage": "https://github.com/davikawasaki/correios-plp-to-pdf#readme",
+  "dependencies": {
+    "node-fpdf": "^1.0.26"
+  }
+}
