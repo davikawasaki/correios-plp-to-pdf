@@ -1,0 +1,31 @@
+{
+    "code": "1619750448",
+    "contractNumber": "9912208555",
+    "administrativeNumber": "08082650",
+    "postalCardNumber": "0057018901",
+    "shipper": {
+        "name": "Google São Paulo",
+        "address": {
+            "street": "Av. Brigadeiro Faria Lima",
+            "number": "3900",
+            "complement": "5º andar",
+            "neighborhood": "Itaim",
+            "city": "São Paulo",
+            "state": "SP"
+        }
+    },
+    "shipments": [
+        {
+            "trackingNumber": "SI733258825BR",
+            "zipCode": "30170010",
+            "weight": "0.500",
+            "additionalServices": [
+                { "code": "001", "value": null },
+                { "code": "002", "value": null },
+                { "code": "019", "value": "75.90" }
+            ],
+            "invoiceNumber": null,
+            "receiver": "Google Belo Horizonte"
+        }
+    ]
+}
