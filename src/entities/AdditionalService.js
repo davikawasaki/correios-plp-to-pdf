@@ -1,4 +1,6 @@
-class AditionalService {
+'use strict'
+
+class AdditionalService {
     constructor({
         code, declaredValue
     } = {}) {
@@ -13,3 +15,5 @@ class AditionalService {
     static SERVICE_REGISTRO = "025"
     static SERVICE_VALOR_DECLARADO = this.SERVICE_VALOR_DECLARADO_SEDEX
 }
+
+module.exports = AdditionalService

@@ -1,7 +1,7 @@
 class PostalObject {
     constructor({
         label, postService, cubage, weight,
-        receiver, destination, aditionalServices,
+        receiver, destination, additionalServices,
         dimension, obs
     } = {}) {
         this.label = label
@@ -10,7 +10,7 @@ class PostalObject {
         this.weight = weight
         this.receiver = receiver
         this.destination = destination
-        this.aditionalServices = aditionalServices
+        this.additionalServices = additionalServices
         this.dimension = dimension
         this.obs = obs
     }
