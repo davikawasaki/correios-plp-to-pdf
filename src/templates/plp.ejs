@@ -1,0 +1,245 @@
+<!DOCTYPE html>
+<html>
+    <head>
+    </head>
+    <body style="padding: 1.5em 2.5em 1.5em 1.5em; font-family: Arial, Helvetica, sans-serif;">
+        <div style="width: 100%; display: flex; margin: 1em;">
+            <div style="width: 20%;">
+              <img src="https://raw.githubusercontent.com/stavarengo/php-sigep/master/src/PhpSigep/Pdf/logo-correios.png" width=100% />
+            </div>
+            <div style="width: 80%; font-weight: bold; padding: 0.5em; font-size: 1.6em; text-align: center; vertical-align: middle;">
+                EMPRESA BRASILEIRA DE CORREIOS E TELÉGRAFOS
+            </div>
+        </div>
+        <div style="width: 100%; margin: .5em; border: .1em solid">
+        <div style="font-weight: bold; font-size: 1.1em; text-align: center; margin: .5em 0;">
+            LISTA DE POSTAGEM
+        </div>
+        <div style="display: flex; width: 100%;  margin: 0 .2em">
+            <div style="width: 35%;">
+            <p style="margin: 0;">
+                <span style="font-weight: bold;">Nº da lista: </span>
+                <span><%= code %></span>
+            </p>
+            </div>
+            <div style="width: 65%">
+            <p style="margin: 0;">
+                <span style="font-weight: bold;">Cliente: </span>
+                <span><%= shipper.name %></span>
+            </p>
+            </div>
+        </div>
+        
+        <div style="display: flex; width: 100%;  margin: 0 .2em">
+            <div style="width: 35%;">
+            <p style="margin: .5em 0 0 0;">
+                <span style="font-weight: bold;">Contrato: </span>
+                <span><%= contractNumber %></span>
+            </p>
+            </div>
+            <div style="width: 35%">
+            <p style="margin: .5em 0 0 0;">
+                <span style="font-weight: bold;">Cod. adm.: </span>
+                <span><%= administrativeNumber %></span>
+            </p>
+            </div>
+            <div style="width: 30%">
+            <p style="margin: .5em 0 0 0;">
+                <span style="font-weight: bold;">Cartão: </span>
+                <span><%= postalCardNumber %></span>
+            </p>
+            </div>
+        </div>
+        
+        <div style="display: flex; width: 100%;  margin: 0 .2em">
+            <div style="width: 35%;">
+            <p style="margin: .5em 0 0 0;">
+                <span style="font-weight: bold;">Remetente: </span>
+                <span><%= shipper.name %></span>
+            </p>
+            </div>
+            <div style="width: 65%">
+            <p style="margin: .5em 0;">
+                <span style="font-weight: bold;">Endereço: </span>
+                <span><%= shipper.address.street %></span>
+                <span>, <%= shipper.address.number %></span>
+                <% if (shipper.address.complement != null) { %>
+                    <span> - <%= shipper.address.complement %></span>
+                <% }%>
+                <span> - Bairro: <%= shipper.address.neighborhood %></span>
+                <span> - Cidade: <%= shipper.address.city %></span>
+            </p>
+            </div>
+        </div>
+        
+        <div style="display: flex; width: 100%;  margin: 0 .2em">
+            <div style="width: 100%;">
+            <p style="margin: 0;">
+                <span style="font-weight: bold;">Telefone: </span>
+                <% if (shipper.phoneNumber != null) { %>
+                    <span><%= shipper.phoneNumber %></span>
+                <% }%>
+            </p>
+            </div>
+        </div>
+        </div>
+        
+        
+        
+        
+        
+        <div style="width: 100%; margin: 2em .5em; font-size: .8em; text-align: center; vertical-align: middle; font-family: 'Courier New';">
+            <div style="display: flex; width: 100%;  margin: 0 .2em; font-weight: bold;">
+                <div style="width: 15%;">
+                <p style="margin: 0;">
+                    <span>Nº do objeto</span>
+                </p>
+                </div>
+                <div style="width: 13%">
+                <p style="margin: 0;">
+                    <span>CEP</span>
+                </p>
+                </div>
+                <div style="width: 10%">
+                <p style="margin: 0;">
+                    <span>Peso</span>
+                </p>
+                </div>
+                <div style="width: 4%">
+                <p style="margin: 0;">
+                    <span>AR</span>
+                </p>
+                </div>
+                <div style="width: 4%">
+                <p style="margin: 0;">
+                    <span>MP</span>
+                </p>
+                </div>
+                <div style="width: 4%">
+                <p style="margin: 0;">
+                    <span>VD</span>
+                </p>
+                </div>
+                <div style="width: 10%">
+                <p style="margin: 0;">
+                    <span>Valor declarado</span>
+                </p>
+                </div>
+                <div style="width: 10%">
+                <p style="margin: 0;">
+                    <span>Nota Fiscal</span>
+                </p>
+                </div>
+                <div style="width: 10%">
+                <p style="margin: 0;">
+                    <span>Volume</span>
+                </p>
+                </div>
+                <div style="width: 20%">
+                <p style="margin: 0;">
+                    <span>Destinatário</span>
+                </p>
+                </div>
+            </div>
+
+            <% if (shipments.length > 0) { %>
+                <% shipments.forEach(shipment => {%>
+                    <div style="display: flex; width: 100%; margin: 0 .2em; background-color: #ededed; font-family: 'Courier New';">
+                        <div style="width: 15%;">
+                            <p style="margin: 0;">
+                                <span><%= shipment.trackingNumber %></span>
+                            </p>
+                        </div>
+                        <div style="width: 13%">
+                            <p style="margin: 0;">
+                                <span><%= shipment.zipCode %></span>
+                            </p>
+                        </div>
+                        <div style="width: 10%">
+                            <p style="margin: 0;">
+                                <span><%= shipment.weight %></span>
+                            </p>
+                        </div>
+                        <div style="width: 4%">
+                            <p style="margin: 0;">
+                                <span><%= shipment.ar %></span>
+                            </p>
+                        </div>
+                        <div style="width: 4%">
+                            <p style="margin: 0;">
+                                <span><%= shipment.mp %></span>
+                            </p>
+                        </div>
+                        <div style="width: 4%">
+                            <p style="margin: 0;">
+                                <span><%= shipment.vd %></span>
+                            </p>
+                        </div>
+                        <div style="width: 10%">
+                            <p style="margin: 0;">
+                                <span><%= shipment.declaredValue %></span>
+                            </p>
+                        </div>
+                        <div style="width: 10%">
+                            <p style="margin: 0;">
+                                <span><%= shipment.invoiceNumber %></span>
+                            </p>
+                        </div>
+                        <div style="width: 10%">
+                            <p style="margin: 0;">
+                                <span><%= shipment.volumeNumber %>/<%= shipment.volumeQty %></span>
+                            </p>
+                        </div>
+                        <div style="width: 20%">
+                            <p style="margin: 0;">
+                                <span><%= shipment.receiverName %></span>
+                            </p>
+                        </div>
+                    </div>
+                <%  });%>
+            <% }%>
+        </div>
+        
+        
+        
+        <div style="width: 100%; margin: .5em; border: .1em solid">
+        <div style="font-weight: bold; font-size: 1em; text-align: center; margin: .5em .5em;">
+            APRESENTAR ESTA LISTA EM CASO DE PEDIDO DE INFORMAÇÕES
+        </div>
+        <div style="display: flex; width: 100%; margin: 0 .5em; font-size: .8em;">
+            <div style="width: 60%;">
+            <p style="margin: 0;">
+                <span>Estou ciente do disposto na cláusula terceira do contrato de prestação de serviços</span>
+            </p>
+            </div>
+            <div style="width: 40%">
+            <p style="margin: 0;">
+                <span>Carimbo e assinatura / Matrícula dos Correios</span>
+            </p>
+            </div>
+        </div>
+        
+        <div style="display: flex; width: 100%;  margin: 4em .2em 0 .2em; font-size: .8em; text-align: center;">
+            <div style="width: 50%;">
+            <p style="margin: 0;">
+                <span>________________________________________________________</span>
+            </p>
+            </div>
+        </div>
+        <div style="display: flex; width: 100%;  margin: .5em .2em; font-size: .8em; text-align: center;">
+            <div style="width: 50%;">
+            <p style="margin: 0;">
+                <span>ASSINATURA DO REMETENTE</span>
+            </p>
+            </div>
+        </div>
+        <div style="display: flex; width: 100%;  margin: 3em .2em .5em .2em; font-size: .8em; text-align: center;">
+            <div style="width: 50%;">
+            <p style="margin: 0;">
+                <span>Obs: 1º via p/ a Unidade de Postagem e 2º via p/ o cliente</span>
+            </p>
+            </div>
+        </div>
+        </div>
+    </body>
+</html>
