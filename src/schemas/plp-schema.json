@@ -1,0 +1,178 @@
+{
+    "$schema": "http://json-schema.org/draft-07/schema#",
+    "$id": "http://davikawasaki.com/plp.schema.json",
+    "title": "PLP Request Format",
+    "description": "PLP payload request format",
+    "type": "object",
+    "required": [
+      "code",
+      "contractNumber",
+      "administrativeNumber",
+      "postalCardNumber",
+      "shipper",
+      "shipments"
+    ],
+    "properties": {
+      "code": {
+        "description": "PLP identifier",
+        "type": "string",
+        "pattern": "^\\d+$"
+      },
+      "contractNumber": {
+        "description": "Correios contract number that covers this shipment",
+        "type": "string",
+        "maxLength": 20,
+        "pattern": "^\\d+$"
+      },
+      "administrativeNumber": {
+        "description": "Correios administrative number that covers this shipment",
+        "type": "string",
+        "maxLength": 9,
+        "pattern": "^\\d+$"
+      },
+      "postalCardNumber": {
+        "description": "Correios postal card number that covers this shipment",
+        "type": "string",
+        "maxLength": 10,
+        "pattern": "^\\d+$"
+      },
+      "shipper": {
+        "description": "Shipper data related to this PLP",
+        "type": "object",
+        "required": [
+          "name",
+          "address"
+        ],
+        "properties": {
+          "name": {
+            "description": "Company name that ships the shipment",
+            "type": "string"
+          },
+          "phoneNumber": {
+            "description": "Company phone number that ships the shipment (only numbers)",
+            "type": "string",
+            "minLength": 11,
+            "maxLength": 11,
+            "pattern": "^\\d+$"
+          },
+          "address": {
+            "description": "Shipper address properties",
+            "type": "object",
+            "required": [
+              "street",
+              "neighborhood",
+              "city",
+              "state"
+            ],
+            "properties": {
+              "street": {
+                "description": "Shipper street address",
+                "type": "string",
+                "maxLength": 50
+              },
+              "number": {
+                "description": "Shipper street address number (sn for empty number)",
+                "type": ["string", "null"],
+                "maxLength": 18
+              },
+              "complement": {
+                "description": "Shipper street address complement",
+                "type": ["string", "null"],
+                "maxLength": 30
+              },
+              "neighborhood": {
+                "description": "Shipper neighborhood address",
+                "type": "string",
+                "maxLength": 30
+              },
+              "city": {
+                "description": "Shipper city address",
+                "type": "string",
+                "maxLength": 30
+              },
+              "state": {
+                "description": "Shipper neighborhood address",
+                "type": "string",
+                "minLength": 2,
+                "maxLength": 2,
+                "enum": [
+                    "AC", "AL", "AM", "AP", "BA", "CE", "DF", "ES",
+                    "GO", "MA", "MG", "MS", "MT", "PA", "PB", "PE",
+                    "PI", "PR", "RJ", "RN", "RO", "RR", "RS", "SC",
+                    "SE", "SP", "TO"
+                ]
+              }
+            }
+          }
+        }
+      },
+      "shipments": {
+        "type": "array",
+        "items": { "$ref": "#/$defs/shipment" }
+      }
+    },
+    "$defs": {
+      "additionalService": {
+        "type": "object",
+        "required": [ "code" ],
+        "properties": {
+          "code": {
+            "description": "additional service code (aviso de recebimento, mão própria, valor declarado ou registro)",
+            "type": "string",
+            "minLength": 3,
+            "maxLength": 3,
+            "enum": [ "001", "002", "019", "064", "025" ]
+          },
+          "value": {
+            "description": "additional service amount value",
+            "type": ["string", "null"],
+            "maxLength": 9,
+            "pattern": "^[\\d\\.]+$"
+          }
+        }
+      },
+      "shipment": {
+        "type": "object",
+        "required": [
+          "trackingNumber",
+          "zipCode",
+          "weight",
+          "receiverName"
+        ],
+        "properties": {
+          "trackingNumber": {
+            "description": "Shipping label tracking number (etiqueta)",
+            "type": "string",
+            "maxLength": 13
+          },
+          "zipCode": {
+            "description": "Shipment destination zip code",
+            "type": "string",
+            "maxLength": 20,
+            "pattern": "^\\d+$"
+          },
+          "weight": {
+            "description": "Shipment total weight",
+            "type": "string",
+            "maxLength": 9,
+            "pattern": "^[\\d\\.]+$"
+          },
+          "additionalServices": {
+            "type": ["array", "null"],
+            "items": { "$ref": "#/$defs/additionalService" }
+          },
+          "invoiceNumber": {
+            "description": "Shipment invoice number issued for the destination",
+            "type": ["string", "null"],
+            "maxLength": 8,
+            "pattern": "^\\d+$"
+          },
+          "receiverName": {
+            "description": "Shipment destination company/individual name",
+            "type": "string",
+            "maxLength": 50
+          }
+        }
+      }
+    }
+  }
